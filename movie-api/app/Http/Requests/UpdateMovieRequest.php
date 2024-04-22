@@ -22,8 +22,8 @@ class UpdateMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:255',
-            'description' => 'string|max:1500',
+            'name' => 'string|max:128',
+            'description' => 'string|max:2048',
             'released_at' => 'date',
             'review' => 'min:0|max:5',
         ];

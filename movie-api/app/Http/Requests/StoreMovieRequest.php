@@ -22,8 +22,8 @@ class StoreMovieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:1500',
+            'name' => 'required|string|max:128',
+            'description' => 'required|string|max:2048',
             'released_at' => 'required|date',
             'review' => 'integer|min:0|max:5',
         ];
