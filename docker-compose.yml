@@ -1,0 +1,66 @@
+version: "3.8"
+services: 
+  movie-api:
+    container_name: movie-api
+    build: 
+      context: ./movie-api
+      target: movie-api
+    ports: 
+      - 8000:80
+    volumes: 
+      - ./movie-api:/var/www/html
+      - ./movie-api/public:/var/www/html/public
+    environment: 
+      APP_NAME: myVid
+      APP_ENV: dev
+      APP_KEY: base64:XfJMEWY4Y00O7TNw0oI9ND+1ijwiXu3r1m0NOZyJyp8=
+      APP_DEBUG: true
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: webservices
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      QUEUE_CONNECTION: database
+    depends_on: 
+      - db
+    networks: 
+      - app_network
+
+  db: 
+    image: postgres:15
+    container_name: postgres-db-webservices
+    restart: always
+    ports: 
+      - "5432:5432"
+    environment: 
+      POSTGRES_DB: webservices
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks: 
+      - app_network
+
+  pgadmin: 
+    image: dpage/pgadmin4
+    container_name: pgadmin-webservices
+    restart: always
+    ports: 
+      - "8888:80"
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes: 
+      - pgadmin:/var/lib/pgadmin*
+
+networks: 
+  app_network: 
+    driver: bridge
+
+volumes: 
+  db: 
+    external: true
+  pgadmin: 
+    external: true
