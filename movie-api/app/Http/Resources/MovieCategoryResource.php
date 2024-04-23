@@ -14,13 +14,24 @@ class MovieCategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+        $baseUrl = config('app.url') . '/api';
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
             'released_at' => $this->released_at,
             'review' => $this->when(!empty($this->review), $this->review),
-            'categories' => CategoryResource::collection($this->categories)
+            'categories' => CategoryResource::collection($this->categories),
+            'links' => [
+                'self' => [
+                    'href' => "{$baseUrl}/movies/{$this->id}"
+                ],
+                'categories' => [
+                    'href' => "{$baseUrl}/movies/{$this->id}/categories"
+                ]
+            ]
         ];
     }
 }
