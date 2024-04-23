@@ -12,12 +12,21 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 100; $i++) {
-            $faker = Factory::create();
-
-            Movie::factory()->create([
-                'name' => $faker->name,
+        $categories = Category::get()
+        $movies = Movie::get()
+        foreach ($movies as &$movie) {
+            $randomCategory = array_rand($categories);
+            MovieCategory::factory()->create([
+                'movie_id' => $movie->id,
+                'category_id' => $categories[$randomCategory]->id,
             ]);
+            if (rand(0, 1)) {
+                $oneOtherRandomCategory = array_rand($categories);
+                MovieCategory::factory()->create([
+                    'movie_id' => $movie->id,
+                    'category_id' => $categories[$oneOtherRandomCategory]->id,
+                ]);
+            }
         }
     }
 }
