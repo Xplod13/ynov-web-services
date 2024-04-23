@@ -16,7 +16,7 @@ composer install
 ### Donner des droits au dossier storage
 
 ```
-chmod 644 -R storage
+chmod 777 -R storage
 ```
 
 ### Migrer la bdd

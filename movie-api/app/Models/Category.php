@@ -6,25 +6,20 @@ use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Movie extends Model
+class Category extends Model
 {
     use HasFactory, Filterable;
 
     private static $whiteListFilter =[
         'name',
-        'description',
     ];
 
     protected $fillable = [
-        "name",
-        "description",
-        "released_at",
-        "review",
+        'name',
     ];
 
-    public function categories()
+    public function movies(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Category::class, 'movie_categories');
+        return $this->belongsToMany(Movie::class, 'movie_categories');
     }
-
 }
