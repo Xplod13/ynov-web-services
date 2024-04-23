@@ -16,7 +16,6 @@ class MovieController extends Controller
      */
     public function index(Request $request)
     {
-
         $movies = Movie::filter($request->all())->paginate(15);
         // Assurez-vous que tous les paramètres de requête sont inclus dans les liens de pagination
         $movies->appends($request->all());
