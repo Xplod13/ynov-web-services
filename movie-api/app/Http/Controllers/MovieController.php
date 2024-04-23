@@ -7,15 +7,21 @@ use App\Http\Requests\UpdateMovieRequest;
 use App\Http\Resources\MovieCollection;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new MovieCollection(Movie::paginate());
+
+        $movies = Movie::filter($request->all())->paginate(15);
+        // Assurez-vous que tous les paramètres de requête sont inclus dans les liens de pagination
+        $movies->appends($request->all());
+
+        return new MovieCollection($movies);
     }
 
     /**

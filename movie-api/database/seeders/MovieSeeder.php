@@ -15,7 +15,7 @@ class MovieSeeder extends Seeder
     public function run(): void
     {
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $faker = Factory::create();
 
             Movie::factory()->create([
