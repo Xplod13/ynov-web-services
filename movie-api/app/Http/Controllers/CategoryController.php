@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Models\Movie;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {

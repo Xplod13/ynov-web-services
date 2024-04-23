@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use eloquentFilter\QueryFilter\ModelFilters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class MovieCategory extends Model
 {
@@ -11,7 +13,7 @@ class MovieCategory extends Model
 
     private static $whiteListFilter =[
         'movie_id',
-        'movie_id',
+        'category_id',
     ];
 
     protected $fillable = [

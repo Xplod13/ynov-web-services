@@ -2,30 +2,43 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\Movie;
+use App\Models\MovieCategory;
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class MovieCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $categories = Category::get()
-        $movies = Movie::get()
+        $categories = Category::all();
+        $movies = Movie::all();
+
         foreach ($movies as &$movie) {
-            $randomCategory = array_rand($categories);
-            MovieCategory::factory()->create([
-                'movie_id' => $movie->id,
-                'category_id' => $categories[$randomCategory]->id,
-            ]);
-            if (rand(0, 1)) {
-                $oneOtherRandomCategory = array_rand($categories);
+            $randomCategory = rand(0, $categories->count() - 1);
+
+
+            if (!MovieCategory::where([['movie_id', $movie->id], ['category_id', $categories[$randomCategory]->id]])->exists()) {
                 MovieCategory::factory()->create([
                     'movie_id' => $movie->id,
-                    'category_id' => $categories[$oneOtherRandomCategory]->id,
+                    'category_id' => $categories[$randomCategory]->id,
                 ]);
+            }
+
+            if (rand(0, 1)) {
+
+                $oneOtherRandomCategory = rand(0, $categories->count() - 1);
+
+                if (!MovieCategory::where([['movie_id', $movie->id], ['category_id', $categories[$oneOtherRandomCategory]->id]])->exists()) {
+                    MovieCategory::factory()->create([
+                        'movie_id' => $movie->id,
+                        'category_id' => $categories[$oneOtherRandomCategory]->id,
+                    ]);
+                }
+
             }
         }
     }
