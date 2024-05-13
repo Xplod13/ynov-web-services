@@ -3,12 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::post('login', [\App\Http\Controllers\TokenController::class, 'login'])->middleware('customThrottle:3,5');
+Route::get('validate/{accessToken}', [\App\Http\Controllers\TokenController::class, 'validate']);
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'auth:api',
 ], function ($router) {
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', [\App\Http\Controllers\AuthController::class, 'me']);
+    Route::get('refresh-token/{refreshToken}/token', [\App\Http\Controllers\TokenController::class, 'refreshToken']);
 });
