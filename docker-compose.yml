@@ -55,6 +55,36 @@ services:
     volumes: 
       - pgadmin:/var/lib/pgadmin*
 
+  auth-api:
+    container_name: auth-api
+    build:
+      context: ./auth-api
+      target: auth-api
+    ports:
+      - 9000:80
+    volumes:
+      - ./auth-api:/var/www/html
+      - ./auth-api/public:/var/www/html/public
+    environment:
+      APP_NAME: myVid
+      APP_ENV: dev
+      APP_KEY: base64:XfJMEWY4Y00O7TNw0oI9ND+1ijwiXu3r1m0NOZyJyp8=
+      APP_DEBUG: true
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: webservices
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      QUEUE_CONNECTION: database
+      JWT_SECRET: u6bcZKX9cBTs6TS4uEhNyAFwXsDrbvnsRw3DSH9VPt5HguNG8gNX5HiOw8Igt0BC
+
+    depends_on:
+      - db
+    networks:
+      - app_network
+
 networks: 
   app_network: 
     driver: bridge
