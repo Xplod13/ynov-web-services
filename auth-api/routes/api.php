@@ -10,4 +10,6 @@ Route::group([
     'middleware' => 'auth:api',
 ], function ($router) {
     Route::get('refresh-token/{refreshToken}/token', [\App\Http\Controllers\TokenController::class, 'refreshToken']);
+
+    Route::apiResource('account', \App\Http\Controllers\AccountController::class);
 });
