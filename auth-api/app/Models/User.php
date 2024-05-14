@@ -48,6 +48,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+    public function hasRole($role)
+    {
+        return in_array($role, $this->roles);
+    }
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *

@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'login' => 'test',
             'roles' => [
-                'ROLE_USER'
+                'ROLE_USER',
+                'ROLE_ADMIN'
             ]
         ]);
     }

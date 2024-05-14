@@ -3,17 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreAccountRequest extends FormRequest
+class UpdateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-
-        return in_array('ROLE_ADMIN', Auth::user()->roles);
+        return true;
     }
 
     /**
@@ -24,11 +22,10 @@ class StoreAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
-            'roles' => 'required|array',
-            'roles.*' => 'in:ROLE_USER,ROLE_ADMIN',
-            'status' => 'sometimes|in:open,closed'
+            'login' => 'nullable|string|max:255',
+            'password' => 'nullable|string|max:255',
+            'roles' => 'nullable|array|in:ROLE_USER,ROLE_ADMIN',
+            'status' => 'nullable|in:open,closed',
         ];
     }
 }

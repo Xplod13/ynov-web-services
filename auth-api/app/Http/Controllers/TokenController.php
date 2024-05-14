@@ -12,7 +12,7 @@ class TokenController extends Controller
 {
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['login', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 404);
