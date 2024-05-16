@@ -30,6 +30,15 @@ php artisan migrate
 ```
 php artisan db:seed
 ```
+
+# Base de données
+
+## User
+* login
+* password
+* roles
+* status
+
 # Routes disponibles
 
 * POST            api/account 
