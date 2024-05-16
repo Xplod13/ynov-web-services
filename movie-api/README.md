@@ -1,4 +1,4 @@
-# Setupe de l'api movie
+# Setup de l'api movie
 
 ### Se connecter au container
 
@@ -30,3 +30,28 @@ php artisan migrate
 ```
 php artisan db:seed
 ```
+
+# Base de données
+
+## Movie
+* name
+* description
+* released_at
+* review
+
+## Category
+* name
+
+# Routes disponibles
+* GET|HEAD        api/categories
+* POST            api/categories
+* GET|HEAD        api/categories/{category}
+* PUT|PATCH       api/categories/{category}
+* DELETE          api/categories/{category}
+* GET|HEAD        api/categories/{category}/movies
+* GET|HEAD        api/movies
+* POST            api/movies
+* GET|HEAD        api/movies/{movie}
+* PUT|PATCH       api/movies/{movie}
+* DELETE          api/movies/{movie}
+* GET|HEAD        api/movies/{movie}/categories
