@@ -11,5 +11,5 @@ Route::group([
 ], function ($router) {
     Route::get('refresh-token/{refreshToken}/token', [\App\Http\Controllers\TokenController::class, 'refreshToken']);
 
-    Route::apiResource('account', \App\Http\Controllers\AccountController::class);
+    Route::apiResource('account', \App\Http\Controllers\AccountController::class)->only(['show', 'store', 'update']);
 });

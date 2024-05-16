@@ -30,4 +30,11 @@ php artisan migrate
 ```
 php artisan db:seed
 ```
+# Routes disponibles
 
+* POST            api/account 
+* GET|HEAD        api/account/{account}
+* PUT|PATCH       api/account/{account}
+* POST            api/login
+* GET|HEAD        api/refresh-token/{refreshToken}/token
+* GET|HEAD        api/validate/{accessToken}
