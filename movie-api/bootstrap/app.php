@@ -13,6 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(\App\Http\Middleware\ContentNegotiation::class);
+        $middleware->alias([
+            'admin.role' => \App\Http\Middleware\AdminRoleMiddleware::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

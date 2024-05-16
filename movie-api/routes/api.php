@@ -7,10 +7,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryMovieController;
 
-Route::apiResources([
-    'movies' => MovieController::class,
-    'categories' => CategoryController::class,
-]);
+Route::apiResource('categories', CategoryController::class)->only('index', 'show');
+Route::apiResource('movies', MovieController::class)->only('index', 'show');
+
+Route::group([
+    'middleware' => ['auth:api', 'admin.role'],
+], function () {
+    Route::apiResource('movies', MovieController::class)->except('index', 'show');
+    Route::apiResource('categories', CategoryController::class)->except('index', 'show');
+});
 
 Route::apiResource('movies.categories', MovieCategoryController::class)->only(['index']);
 

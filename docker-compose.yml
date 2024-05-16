@@ -23,6 +23,7 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
       QUEUE_CONNECTION: database
+      JWT_SECRET: u6bcZKX9cBTs6TS4uEhNyAFwXsDrbvnsRw3DSH9VPt5HguNG8gNX5HiOw8Igt0BC
     depends_on: 
       - db
     networks: 
