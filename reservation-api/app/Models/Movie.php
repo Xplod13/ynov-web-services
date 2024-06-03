@@ -16,4 +16,9 @@ class Movie extends Model
         'rate',
         'duration'
     ];
+
+    public function seances()
+    {
+        return $this->hasMany(Seance::class);
+    }
 }

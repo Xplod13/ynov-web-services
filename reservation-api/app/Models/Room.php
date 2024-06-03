@@ -14,4 +14,14 @@ class Room extends Model
         'name',
         'seats'
     ];
+
+    public function seances()
+    {
+        return $this->hasMany(Seance::class);
+    }
+
+    public function cinema()
+    {
+        return $this->belongsTo(Cinema::class);
+    }
 }

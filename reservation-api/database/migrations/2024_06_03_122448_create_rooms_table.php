@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('cinema_id');
             $table->text('name');
             $table->integer('seats');
             $table->timestamps();
+            $table->foreign('cinema_id')->references('id')->on('cinemas')->onDelete('cascade');
         });
     }
 

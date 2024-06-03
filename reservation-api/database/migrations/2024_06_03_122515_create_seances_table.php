@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('seances', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('movie_id');
+            $table->uuid('room_id');
             $table->timestamp('date');
             $table->timestamps();
-
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
         });
     }
 

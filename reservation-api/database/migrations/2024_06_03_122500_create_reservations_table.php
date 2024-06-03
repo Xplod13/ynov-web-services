@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('user_id');
+            $table->uuid('seance_id');
             $table->integer('rank');
             $table->string('status');
             $table->integer('seats');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('seance_id')->references('id')->on('seances')->onDelete('cascade');
         });
     }
 
