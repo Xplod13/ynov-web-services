@@ -17,7 +17,9 @@ class ReservationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'rank' => fake()->numberBetween(0),
+            'status' => fake()->randomElement(['open', 'expired', 'confirmed']),
+            'seats' => fake()->numberBetween(1),
         ];
     }
 }

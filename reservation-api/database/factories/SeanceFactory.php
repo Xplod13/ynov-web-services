@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Movie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,13 @@ class SeanceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'movie_id' => Movie::factory()->create([
+                'name' => fake()->name,
+                'description' => fake()->text(4096),
+                'rate' => fake()->numberBetween(0, 5),
+                'duration' => fake()->numberBetween(1, 239)
+            ])->id,
+            'date' => now()
         ];
     }
 }

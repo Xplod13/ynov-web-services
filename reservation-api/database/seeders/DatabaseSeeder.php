@@ -15,5 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        $this->call([
+           CinemaSeeder::class,
+           ReservationSeeder::class,
+           RoomSeeder::class,
+           SeanceSeeder::class,
+        ]);
+
     }
 }
