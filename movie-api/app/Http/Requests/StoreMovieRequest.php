@@ -23,9 +23,10 @@ class StoreMovieRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:128',
-            'description' => 'required|string|max:2048',
+            'description' => 'required|string|max:4096',
             'released_at' => 'required|date',
-            'review' => 'integer|min:0|max:5',
+            'rate' => 'integer|min:0|max:5',
+            'duration' => 'integer|min:1|max:239',
         ];
     }
 }

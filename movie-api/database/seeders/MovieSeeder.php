@@ -6,6 +6,7 @@ use App\Models\Movie;
 use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class MovieSeeder extends Seeder
 {
@@ -19,10 +20,11 @@ class MovieSeeder extends Seeder
             $faker = Factory::create();
 
             Movie::factory()->create([
+                'id' => Str::uuid(),
                 'name' => $faker->name,
                 'description' => $faker->text,
-                'released_at' => $faker->date,
-                'review' => $faker->numberBetween(0, 5)
+                'rate' => $faker->numberBetween(0, 5),
+                'duration' => $faker->numberBetween(1, 239)
             ]);
         }
 

@@ -11,7 +11,7 @@ services:
       - ./movie-api:/var/www/html
       - ./movie-api/public:/var/www/html/public
     environment: 
-      APP_NAME: myVid
+      APP_NAME: movie
       APP_ENV: dev
       APP_KEY: base64:XfJMEWY4Y00O7TNw0oI9ND+1ijwiXu3r1m0NOZyJyp8=
       APP_DEBUG: true
@@ -27,6 +27,35 @@ services:
     depends_on: 
       - db
     networks: 
+      - app_network
+
+  reservation-api:
+    container_name: reservation-api
+    build:
+      context: ./reservation-api
+      target: reservation-api
+    ports:
+      - 7000:80
+    volumes:
+      - ./reservation-api:/var/www/html
+      - ./reservation-api/public:/var/www/html/public
+    environment:
+      APP_NAME: reservation
+      APP_ENV: dev
+      APP_KEY: base64:XfJMEWY4Y00O7TNw0oI9ND+1ijwiXu3r1m0NOZyJyp8=
+      APP_DEBUG: true
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: webservices
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      QUEUE_CONNECTION: database
+      JWT_SECRET: u6bcZKX9cBTs6TS4uEhNyAFwXsDrbvnsRw3DSH9VPt5HguNG8gNX5HiOw8Igt0BC
+    depends_on:
+      - db
+    networks:
       - app_network
 
   db: 
@@ -67,7 +96,7 @@ services:
       - ./auth-api:/var/www/html
       - ./auth-api/public:/var/www/html/public
     environment:
-      APP_NAME: myVid
+      APP_NAME: auth
       APP_ENV: dev
       APP_KEY: base64:XfJMEWY4Y00O7TNw0oI9ND+1ijwiXu3r1m0NOZyJyp8=
       APP_DEBUG: true

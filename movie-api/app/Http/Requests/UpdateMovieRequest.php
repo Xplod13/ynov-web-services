@@ -23,9 +23,9 @@ class UpdateMovieRequest extends FormRequest
     {
         return [
             'name' => 'string|max:128',
-            'description' => 'string|max:2048',
-            'released_at' => 'date',
-            'review' => 'min:0|max:5',
+            'description' => 'string|max:4096',
+            'rate' => 'min:0|max:5',
+            'duration' => 'min:1|max:239',
         ];
     }
 }
