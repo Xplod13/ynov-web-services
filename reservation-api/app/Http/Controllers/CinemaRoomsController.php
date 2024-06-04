@@ -6,10 +6,12 @@ use App\Http\Requests\StoreCinemaRoomsRequest;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateCinemaRoomsRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Http\Resources\RoomCollection;
 use App\Http\Resources\RoomResource;
 use App\Models\Cinema;
 use App\Models\CinemaRooms;
 use App\Models\Room;
+use PHPUnit\Event\CollectingDispatcher;
 
 class CinemaRoomsController extends Controller
 {
@@ -18,7 +20,7 @@ class CinemaRoomsController extends Controller
      */
     public function index(Cinema $cinema)
     {
-        dd($cinema->rooms);
+        return new RoomCollection($cinema->rooms()->paginate());
     }
 
     /**
