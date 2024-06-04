@@ -15,4 +15,14 @@ class Reservation extends Model
         'status',
         'seats'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_reservations')->withTimestamps();
+    }
+
+    public function seance()
+    {
+        return $this->belongsTo(Seance::class, 'reservation_seance')->withTimestamps();
+    }
 }

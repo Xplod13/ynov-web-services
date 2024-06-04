@@ -14,4 +14,19 @@ class Seance extends Model
         'movie_id',
         'date'
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'reservation_seance')->withTimestamps();
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'room_seances')->withTimestamps();
+    }
+
+    public function movie()
+    {
+        return $this->belongsTo(Movie::class, 'room_seances')->withTimestamps();
+    }
 }
