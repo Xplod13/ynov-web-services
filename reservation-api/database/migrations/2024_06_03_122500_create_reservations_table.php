@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('rank');
             $table->string('status');
             $table->integer('seats');
+            $table->timestamp('expires_at');
             $table->timestamps();
         });
     }

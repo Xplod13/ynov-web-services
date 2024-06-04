@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class ReservationFactory extends Factory
             'rank' => fake()->numberBetween(0),
             'status' => fake()->randomElement(['open', 'expired', 'confirmed']),
             'seats' => fake()->numberBetween(1),
+            'expires_at' => Carbon::now()->addHours(6),
         ];
     }
 }

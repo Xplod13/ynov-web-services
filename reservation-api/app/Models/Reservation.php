@@ -13,7 +13,8 @@ class Reservation extends Model
     protected $fillable = [
         'rank',
         'status',
-        'seats'
+        'seats',
+        'expires_at'
     ];
 
     public function user()
