@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Models\Movie;
 use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
+
+    public function askReservation(StoreReservationRequest $request, Movie $movie)
+    {
+
+
+
+
+    }
+
+
+
+
     /**
      * Display a listing of the resource.
      */
