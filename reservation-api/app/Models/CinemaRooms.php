@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CinemaRooms extends Pivot
 {
-    use HasFactory;
+    protected $table = 'cinema_rooms';
 }

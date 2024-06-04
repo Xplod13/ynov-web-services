@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('movie_id');
             $table->uuid('seance_id');
-            $table->foreignUuid('movie_id')->references('id')->on('movies')->onDelete('cascade');
-            $table->foreignUuid('seance_id')->references('id')->on('seances')->onDelete('cascade');
+            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('seance_id')->references('id')->on('seances')->onDelete('cascade');
             $table->timestamps();
         });
     }

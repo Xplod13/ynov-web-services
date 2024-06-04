@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Room extends Model
 {
@@ -14,4 +15,9 @@ class Room extends Model
         'name',
         'seats'
     ];
+
+    public function cinemas(): BelongsToMany
+    {
+        return $this->belongsToMany(Cinema::class, 'cinema_rooms');
+    }
 }

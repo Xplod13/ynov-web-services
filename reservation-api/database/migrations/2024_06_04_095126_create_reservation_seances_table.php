@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('reservation_id');
             $table->uuid('seance_id');
-            $table->foreignUuid('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
-            $table->foreignUuid('seance_id')->references('id')->on('seances')->onDelete('cascade');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->foreign('seance_id')->references('id')->on('seances')->onDelete('cascade');
             $table->timestamps();
         });
     }

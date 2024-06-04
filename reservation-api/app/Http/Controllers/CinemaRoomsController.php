@@ -3,64 +3,79 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCinemaRoomsRequest;
+use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateCinemaRoomsRequest;
+use App\Http\Requests\UpdateRoomRequest;
+use App\Http\Resources\RoomResource;
+use App\Models\Cinema;
 use App\Models\CinemaRooms;
+use App\Models\Room;
 
 class CinemaRoomsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Cinema $cinema)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        dd($cinema->rooms);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCinemaRoomsRequest $request)
+    public function store(StoreRoomRequest $request, Cinema $cinema)
     {
-        //
+        $room = Room::create($request->validated());
+
+        $cinema->rooms()->attach($room->id);
+
+        return new RoomResource($room);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CinemaRooms $cinemaRooms)
+    public function show(Cinema $cinema, Room $room)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CinemaRooms $cinemaRooms)
-    {
-        //
+        if($cinema->rooms()->wherePivot('room_id', $room->id)->exists()) {
+            return new RoomResource($room);
+        }
+
+        return response()->abort(404);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCinemaRoomsRequest $request, CinemaRooms $cinemaRooms)
+    public function update(UpdateRoomRequest $request, Cinema $cinema, Room $room)
     {
-        //
+        $data = $request->validated();
+
+        if($cinema->rooms()->wherePivot('room_id', $room->id)->exists()) {
+
+            $room->update($data);
+
+            return new RoomResource($room);
+        }
+
+        return response()->abort(404);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CinemaRooms $cinemaRooms)
+    public function destroy(Cinema $cinema, Room $room)
     {
-        //
+        if($cinema->rooms()->wherePivot('room_id', $room->id)->exists()) {
+
+            $room->forceDelete();
+
+            return response()->noContent();
+        }
+
+        return response()->abort(404);
+
     }
 }

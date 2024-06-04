@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('cinema_id');
             $table->uuid('room_id');
-            $table->foreignUuid('cinema_id')->references('id')->on('cinemas')->onDelete('cascade');
-            $table->foreignUuid('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreign('cinema_id')->references('id')->on('cinemas')->onDelete('cascade');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamps();
         });
     }
