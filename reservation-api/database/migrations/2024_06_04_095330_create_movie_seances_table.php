@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_reservations', function (Blueprint $table) {
+        Schema::create('movie_seances', function (Blueprint $table) {
             $table->id();
-            $table->uuid('user_id');
-            $table->uuid('reservation_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
+            $table->uuid('movie_id');
+            $table->uuid('seance_id');
+            $table->foreignUuid('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreignUuid('seance_id')->references('id')->on('seances')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /** 
+    /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_reservations');
+        Schema::dropIfExists('movie_seances');
     }
 };

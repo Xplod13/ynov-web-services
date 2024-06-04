@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('movie_seances', function (Blueprint $table) {
+        Schema::create('cinema_rooms', function (Blueprint $table) {
             $table->id();
-            $table->uuid('movie_id');
-            $table->uuid('seance_id');
-            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
-            $table->foreign('seance_id')->references('id')->on('seances')->onDelete('cascade');
+            $table->uuid('cinema_id');
+            $table->uuid('room_id');
+            $table->foreignUuid('cinema_id')->references('id')->on('cinemas')->onDelete('cascade');
+            $table->foreignUuid('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('movie_seances');
+        Schema::dropIfExists('cinema_rooms');
     }
 };

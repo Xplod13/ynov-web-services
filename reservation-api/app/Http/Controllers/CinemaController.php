@@ -4,24 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCinemaRequest;
 use App\Http\Requests\UpdateCinemaRequest;
+use App\Http\Resources\CinemaCollection;
+use App\Http\Resources\CinemaResource;
 use App\Models\Cinema;
+use Illuminate\Http\Request;
 
 class CinemaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return new CinemaCollection(Cinema::filter($request->all())->paginate());
     }
 
     /**
@@ -29,7 +24,7 @@ class CinemaController extends Controller
      */
     public function store(StoreCinemaRequest $request)
     {
-        //
+        return new CinemaResource(Cinema::create($request->validated()));
     }
 
     /**
@@ -37,15 +32,7 @@ class CinemaController extends Controller
      */
     public function show(Cinema $cinema)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cinema $cinema)
-    {
-        //
+        return new CinemaResource($cinema);
     }
 
     /**
@@ -53,7 +40,9 @@ class CinemaController extends Controller
      */
     public function update(UpdateCinemaRequest $request, Cinema $cinema)
     {
-        //
+        $cinema->updateOrFail($request->validated());
+
+        return new CinemaResource($cinema);
     }
 
     /**
@@ -61,6 +50,8 @@ class CinemaController extends Controller
      */
     public function destroy(Cinema $cinema)
     {
-        //
+        $cinema->forceDelete();
+
+        return response()->noContent();
     }
 }
