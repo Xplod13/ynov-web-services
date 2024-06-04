@@ -20,4 +20,8 @@ class Room extends Model
     {
         return $this->belongsToMany(Cinema::class, 'cinema_rooms');
     }
+    public function seances(): BelongsToMany
+    {
+        return $this->belongsToMany(Seance::class, 'room_seances')->withTimestamps();
+    }
 }

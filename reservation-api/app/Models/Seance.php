@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Seance extends Model
 {
@@ -15,18 +16,8 @@ class Seance extends Model
         'date'
     ];
 
-    public function reservations()
+    public function rooms(): BelongsToMany
     {
-        return $this->hasMany(Reservation::class, 'reservation_seance')->withTimestamps();
-    }
-
-    public function room()
-    {
-        return $this->belongsTo(Room::class, 'room_seances')->withTimestamps();
-    }
-
-    public function movie()
-    {
-        return $this->belongsTo(Movie::class, 'room_seances')->withTimestamps();
+        return $this->belongsToMany(Room::class, 'room_seances')->withTimestamps();
     }
 }
