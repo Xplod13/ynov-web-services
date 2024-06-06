@@ -19,6 +19,6 @@ class Movie extends Model
 
     public function seances()
     {
-        return $this->hasMany(Seance::class, 'movie_seances')->withTimestamps();
+        return $this->belongsToMany(Seance::class, 'movie_seances')->withTimestamps();
     }
 }

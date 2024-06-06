@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,8 @@ Route::group([
     Route::apiResource('cinema.rooms', \App\Http\Controllers\CinemaRoomsController::class);
 
     Route::apiResource('cinema.rooms.seances', \App\Http\Controllers\RoomSeancesController::class);
+
+    Route::get('/movie/{movie}/reservations', [ReservationController::class, 'index']);
 });
 
 Route::group([
@@ -21,4 +24,10 @@ Route::group([
     Route::apiResource('cinema.rooms', \App\Http\Controllers\CinemaRoomsController::class)->only(['index', 'show']);
 
     Route::apiResource('cinema.rooms.seances', \App\Http\Controllers\RoomSeancesController::class)->only(['index', 'show']);
+
+    Route::apiResource('reservations', \App\Http\Controllers\ReservationController::class)->only(['show']);
+
+    Route::post('/movie/{movie}/reservations', [ReservationController::class, 'show']);
+
+    Route::post('/reservations/{reservation}/confirm', [ReservationController::class, 'confirm']);
 });

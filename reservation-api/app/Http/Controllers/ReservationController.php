@@ -4,37 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Http\Resources\ReservationCollection;
+use App\Http\Resources\ReservationResource;
 use App\Models\Movie;
 use App\Models\Reservation;
+use App\Models\Seance;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
-
-    public function askReservation(StoreReservationRequest $request, Movie $movie)
-    {
-
-
-
-
-    }
-
-
-
-
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Movie $movie)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return new ReservationCollection($movie->seances()->with('reservations')->paginate());
     }
 
     /**
@@ -45,35 +29,26 @@ class ReservationController extends Controller
         //
     }
 
+    public function confirm()
+    {
+
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Reservation $reservation)
     {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Reservation $reservation)
-    {
-        //
-    }
+        if (in_array('ROLE_ADMIN', $user->roles)) {
+            return new ReservationResource($reservation);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateReservationRequest $request, Reservation $reservation)
-    {
-        //
-    }
+        if ($reservation->user()->wherePivot('user_id', $user->id)->exists()) {
+            return new ReservationResource($reservation);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Reservation $reservation)
-    {
-        //
+        return response()->abort(404);
     }
 }

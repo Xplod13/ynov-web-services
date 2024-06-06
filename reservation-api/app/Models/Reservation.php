@@ -19,7 +19,7 @@ class Reservation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_reservations')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_reservations')->withTimestamps();
     }
 
     public function seance()

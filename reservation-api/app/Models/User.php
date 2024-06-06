@@ -71,6 +71,6 @@ class User extends Authenticatable implements JWTSubject
 
     public function reservations()
     {
-        return $this->hasMany(Reservation::class, 'user_reservations')->withTimestamps();
+        return $this->belongsToMany(Reservation::class, 'user_reservations');
     }
 }
