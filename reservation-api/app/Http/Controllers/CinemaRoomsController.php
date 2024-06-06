@@ -45,7 +45,7 @@ class CinemaRoomsController extends Controller
             return new RoomResource($room);
         }
 
-        return response()->abort(404);
+        abort(404);
     }
 
     /**
@@ -62,7 +62,7 @@ class CinemaRoomsController extends Controller
             return new RoomResource($room);
         }
 
-        return response()->abort(404);
+        abort(404);
     }
 
     /**
@@ -77,7 +77,7 @@ class CinemaRoomsController extends Controller
             return response()->noContent();
         }
 
-        return response()->abort(404);
+        abort(404);
 
     }
 }

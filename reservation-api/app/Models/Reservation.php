@@ -17,13 +17,13 @@ class Reservation extends Model
         'expires_at'
     ];
 
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class, 'user_reservations')->withTimestamps();
     }
 
-    public function seance()
+    public function seances()
     {
-        return $this->belongsTo(Seance::class, 'reservation_seance')->withTimestamps();
+        return $this->belongsToMany(Seance::class, 'reservation_seances')->withTimestamps();
     }
 }

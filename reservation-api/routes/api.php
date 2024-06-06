@@ -27,7 +27,7 @@ Route::group([
 
     Route::apiResource('reservations', \App\Http\Controllers\ReservationController::class)->only(['show']);
 
-    Route::post('/movie/{movie}/reservations', [ReservationController::class, 'show']);
+    Route::post('/movie/{movie}/reservations', [ReservationController::class, 'store']);
 
     Route::post('/reservations/{reservation}/confirm', [ReservationController::class, 'confirm']);
 });
