@@ -15,7 +15,7 @@ class ContentNegotiation
         // Vérifiez l'en-tête Accept pour le type de réponse souhaité
         $acceptHeader = $request->header('Accept');
 
-        if (strpos($acceptHeader, 'application/xml') !== false) {
+        if (strpos($acceptHeader, 'application/xml') !== false && strpos($acceptHeader, 'text/html') === false) {
             // Convertir la réponse en XML
             $content = $response->getContent();
             $xml = new \SimpleXMLElement('<root/>');
