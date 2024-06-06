@@ -20,7 +20,7 @@ docker compose build
 
 # Lancer le projet
 ```
-docker compose build
+docker compose up
 ```
 
 # Charger les migrations
