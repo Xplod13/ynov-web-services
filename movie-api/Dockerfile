@@ -34,18 +34,11 @@ RUN apt-get update \
         gd \
         exif \
         opcache \
-        pdo_mysql \
         pdo_pgsql \
         pgsql \
         pcntl \
         zip \
     && rm -rf /var/lib/apt/lists/*;
-
-RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
-
-RUN sed -i -e "s/html/html\/public/g" /etc/apache2/sites-enabled/000-default.conf
-
-RUN a2enmod rewrite
 
 COPY . $APP_HOME
 
@@ -53,8 +46,13 @@ RUN composer install --no-interaction
 
 COPY docker/php/laravel.ini /usr/local/etc/php/conf.d/laravel.ini
 
-RUN chmod -R 777 $APP_HOME/storage
+COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
-WORKDIR $APP_HOME
+RUN a2enmod rewrite
 
-RUN chown -R www-data:www-data $APP_HOME
+EXPOSE 80
+
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html/storage
+
+CMD ["apache2-foreground"]

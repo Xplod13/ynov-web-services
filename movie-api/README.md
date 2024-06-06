@@ -1,5 +1,10 @@
 # Setup de l'api movie
 
+
+### IP
+
+http://localhost:8000/api
+
 ### Se connecter au container
 
 ```
