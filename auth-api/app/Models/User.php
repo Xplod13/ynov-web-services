@@ -8,6 +8,60 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     type="object",
+ *     title="User",
+ *     description="User model",
+ *     required={"id", "login", "password", "roles", "status", "created_at", "updated_at"},
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         format="int64",
+ *         description="User ID"
+ *     ),
+ *     @OA\Property(
+ *         property="login",
+ *         type="string",
+ *         description="User login"
+ *     ),
+ *     @OA\Property(
+ *         property="password",
+ *         type="string",
+ *         description="User password"
+ *     ),
+ *     @OA\Property(
+ *         property="roles",
+ *         description="User roles",
+ *         type="array",
+ *         @OA\Items(
+ *              type="string",
+ *              description="role",
+ *              @OA\Schema(type="string")
+ *         ),
+ *     ),
+ *     @OA\Property(
+ *         property="status",
+ *         type="string",
+ *         description="User status"
+ *     ),
+  *     @OA\Property(
+ *         property="created_at",
+ *         type="string",
+ *         format="date-time",
+ *         description="Creation timestamp",
+ *         example="2024-06-05T12:34:56.789Z"
+ *     ),
+ *     @OA\Property(
+ *         property="updated_at",
+ *         type="string",
+ *         format="date-time",
+ *         description="Last update timestamp",
+ *         example="2024-06-05T12:34:56.789Z"
+ *     )
+ * )
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;

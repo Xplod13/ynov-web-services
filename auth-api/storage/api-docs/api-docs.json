@@ -1,0 +1,386 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "auth-api microservice",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/account": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Affichage d'un compte utilisateur",
+                "description": "Renvoie un compte utilisateur",
+                "operationId": "b5b6885944c4ddfadae965b45b5727f8",
+                "responses": {
+                    "201": {
+                        "description": "Affiche un utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Modification d'un compte utilisateur",
+                "description": "Renvoie un compte utilisateur",
+                "operationId": "3799e5ca4e1c627c8b39b1c6d2ee91a3",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "createAccountRequest",
+                        "in": "query",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateAccountRequest"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur modifié avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Création d'un compte utilisateur",
+                "description": "Renvoie un compte utilisateur",
+                "operationId": "648f9a087a595875582d2780ccc5e4d4",
+                "parameters": [
+                    {
+                        "name": "createAccountRequest",
+                        "in": "query",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreAccountRequest"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur crée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Login route",
+                "description": "Route pour se login en tant qu'utilisateur",
+                "operationId": "296e5c831b440bb716466fe044e6a21e",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur loggedin"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/validate/{accessToken}": {
+            "get": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Confirme la validité d'un access token",
+                "description": "Permet de valider l'access token (est-t-il toujours valable ? existe-il ? Tant de question...)",
+                "operationId": "3c3906517bf9e5eedf6c0e50f1979c24",
+                "parameters": [
+                    {
+                        "name": "accessToken",
+                        "in": "path",
+                        "description": "L'access token à valider",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Renvoie l'access token d'un utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "accessToken": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzE3NTA2Njc4LCJleHAiOjE3MTc1MTAyNzgsIm5iZiI6MTcxNzUwNjY3OCwianRpIjoic1dnblJiUzE5eENvM2UwcyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4rynHx58WzK_s0cYH8ExaiyuAwFC2F3xd7jVLeubl2A"
+                                        },
+                                        "accessTokenExpiresAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-06-05T12:34:56.789Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Token absent ou invalide"
+                    }
+                }
+            }
+        },
+        "/api/refresh-token/{refreshToken}/token": {
+            "get": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Création d'un access token à partir d'un refresh token",
+                "description": "Permet la génération d'un nouvel access token sans avoir à s'authentifier à nouveau. \\n Renvoie un access token et un refresh token.",
+                "operationId": "3133bc1256ae3eec780fa00152f94a67",
+                "parameters": [
+                    {
+                        "name": "refreshToken",
+                        "in": "path",
+                        "description": "Refresh Token à consommer",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Création avec succès des nouveaux tokens",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "accessToken": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzE3NTA2Njc4LCJleHAiOjE3MTc1MTAyNzgsIm5iZiI6MTcxNzUwNjY3OCwianRpIjoic1dnblJiUzE5eENvM2UwcyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4rynHx58WzK_s0cYH8ExaiyuAwFC2F3xd7jVLeubl2A"
+                                        },
+                                        "accessTokenExpiresAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-06-05T12:34:56.789Z"
+                                        },
+                                        "refreshToken": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzE3NTA2Njc4LCJleHAiOjE3MTc1MTAyNzgsIm5iZiI6MTcxNzUwNjY3OCwianRpIjoic1dnblJiUzE5eENvM2UwcyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4rynHx58WzK_s0cYH8ExaiyuAwFC2F3xd7jVLeubl2A"
+                                        },
+                                        "refreshTokenExpiresAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-06-05T12:34:56.789Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Token absent ou invalide"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreAccountRequest": {
+                "title": "StoreAccountRequest",
+                "description": "Store user model request",
+                "required": [
+                    "login",
+                    "password",
+                    "roles",
+                    "status"
+                ],
+                "properties": {
+                    "login": {
+                        "description": "User login",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string"
+                    },
+                    "roles": {
+                        "description": "User roles",
+                        "type": "array",
+                        "items": {
+                            "description": "role",
+                            "type": "string"
+                        }
+                    },
+                    "status": {
+                        "description": "User status",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateAccountRequest": {
+                "title": "UpdateAccountRequest",
+                "description": "Update user model request",
+                "required": [
+                    "login",
+                    "password",
+                    "roles",
+                    "status"
+                ],
+                "properties": {
+                    "login": {
+                        "description": "User login",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string"
+                    },
+                    "roles": {
+                        "description": "User roles",
+                        "type": "array",
+                        "items": {
+                            "description": "role",
+                            "type": "string"
+                        }
+                    },
+                    "status": {
+                        "description": "User status",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "required": [
+                    "id",
+                    "login",
+                    "password",
+                    "roles",
+                    "status",
+                    "created_at",
+                    "updated_at"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "login": {
+                        "description": "User login",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string"
+                    },
+                    "roles": {
+                        "description": "User roles",
+                        "type": "array",
+                        "items": {
+                            "description": "role",
+                            "type": "string"
+                        }
+                    },
+                    "status": {
+                        "description": "User status",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

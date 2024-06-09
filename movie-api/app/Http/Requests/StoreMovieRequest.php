@@ -4,6 +4,44 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="StoreMovieRequest",
+ *     type="object",
+ *     title="StoreMovieRequest",
+ *     description="Store movie model request",
+ *     required={"name","description","released_at"},
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Movie name",
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         description="Movie description",
+ *     ),
+ *     @OA\Property(
+ *         property="released_at",
+ *         type="date",
+ *         description="Movie release date",
+ *     ),
+ *     @OA\Property(
+ *         property="rate",
+ *         type="number",
+ *         description="Movie rate",
+ *         minimum=1, 
+ *         maximum=5,
+ *     ),
+ *     @OA\Property(
+ *         property="duration",
+ *         type="number",
+ *         description="Movie duration",
+ *         minimum=1, 
+ *         maximum=239,
+ *     ),
+ * )
+ */
 class StoreMovieRequest extends FormRequest
 {
     /**

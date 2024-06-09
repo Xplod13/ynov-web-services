@@ -22,6 +22,37 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /**
+     *  @OA\Post(
+     *      path="/api/account",
+     *      tags={"Account"},
+     *      summary="Création d'un compte utilisateur",
+     *      description="Renvoie un compte utilisateur",
+     *      @OA\Parameter(
+     *          required=true,
+     *          name="createAccountRequest",
+     *          in="query",
+     *          @OA\JsonContent(ref="#/components/schemas/StoreAccountRequest"),
+     *      ),
+     *      @OA\Response(
+     *           response=201,
+     *           @OA\JsonContent(ref="#/components/schemas/User"),
+     *           description="Utilisateur crée avec succès",
+     *      ),
+     *      @OA\Response(
+     *           response=401,
+     *           description="Unauthorized",
+     *      ),
+     *      @OA\Response(
+     *           response=403,
+     *           description="Unauthorized",
+     *      ),
+     *      @OA\Response(
+     *           response=422,
+     *           description="Unauthorized",
+     *      ),
+     *  )     
+     */
     public function store(StoreAccountRequest $request)
     {
         $data = $request->validated();
@@ -35,6 +66,31 @@ class AccountController extends Controller
 
     /**
      * Display the specified resource.
+     */
+    /**
+     *  @OA\get(
+     *      path="/api/account",
+     *      tags={"Account"},
+     *      summary="Affichage d'un compte utilisateur",
+     *      description="Renvoie un compte utilisateur",
+     *      @OA\Response(
+     *           response=201,
+     *           @OA\JsonContent(ref="#/components/schemas/User"),
+     *           description="Affiche un utilisateur",
+     *      ),
+     *      @OA\Response(
+     *           response=401,
+     *           description="Unauthorized",
+     *      ),
+     *      @OA\Response(
+     *           response=403,
+     *           description="Unauthorized",
+     *      ),
+     *      @OA\Response(
+     *           response=422,
+     *           description="Unauthorized",
+     *      ),
+     *  )     
      */
     public function show(string $id)
     {
@@ -53,6 +109,51 @@ class AccountController extends Controller
         abort(403);
     }
 
+    /**
+     *  @OA\Put(
+     *      path="/api/account",
+     *      tags={"Account"},
+     *      summary="Modification d'un compte utilisateur",
+     *      description="Renvoie un compte utilisateur",
+     *      @OA\Parameter(
+     *          name="uid",
+     *          required=true,
+     *          in="path",
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  description="Identifiant utilisateur",
+     *                  type="string",
+     *                  required={ "uid" },
+     *                  @OA\Property(property="uid", type="string")
+     *              )
+     *          ),
+     *      ),
+     *      @OA\Parameter(
+     *          required=true,
+     *          name="createAccountRequest",
+     *          in="query",
+     *          @OA\JsonContent(ref="#/components/schemas/UpdateAccountRequest"),
+     *      ),
+     *      @OA\Response(
+     *           response=201,
+     *           @OA\JsonContent(ref="#/components/schemas/User"),
+     *           description="Utilisateur modifié avec succès",
+     *      ),
+     *      @OA\Response(
+     *           response=401,
+     *           description="Unauthorized",
+     *      ),
+     *      @OA\Response(
+     *           response=403,
+     *           description="Unauthorized",
+     *      ),
+     *      @OA\Response(
+     *           response=422,
+     *           description="Unauthorized",
+     *      ),
+     *  )     
+     */
     public function update(UpdateAccountRequest $request, string $id)
     {
         $data = $request->validated();

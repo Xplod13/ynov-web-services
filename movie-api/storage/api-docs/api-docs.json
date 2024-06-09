@@ -1,0 +1,813 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "movie-api microservice",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Affichage des catégories",
+                "description": "Renvoie les catégories",
+                "operationId": "3f5817a34833d0a1f4af4548dd3aeaba",
+                "responses": {
+                    "201": {
+                        "description": "Affiche les catégories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Categories": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Category"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Modification d'une catégorie",
+                "description": "Renvoie une catégorie",
+                "operationId": "d2a10be2a765ef3aa92ead2875871967",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "UpdateCategoryRequest",
+                        "in": "query",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateCategoryRequest"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Catégorie modifié avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Création d'une catégorie",
+                "description": "Renvoie une catégorie",
+                "operationId": "71fcad552bb0eaba9fb191fd8d8dcab0",
+                "parameters": [
+                    {
+                        "name": "CreateCategoryRequest",
+                        "in": "query",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreCategoryRequest"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Catégorie crée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Suppression d'une catégorie",
+                "description": "Ne renvoie rien",
+                "operationId": "906f57aa799d7687f792d2514564dd74",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Catégorie supprimée avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/categories/{category}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Affichage d'une catégorie",
+                "description": "Renvoie une catégorie",
+                "operationId": "e92579e78391b6199e78c2a091dbea0a",
+                "responses": {
+                    "201": {
+                        "description": "Affiche une catégorie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/movies/categories": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Affichage des catégories et de leur films",
+                "description": "Renvoie les catégories et leur films",
+                "operationId": "f08530c0db7c50beab2b249fc129af2f",
+                "responses": {
+                    "201": {
+                        "description": "Affiche les catégorie et leur films",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Category and movies": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CategoryMovieResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/categories/movies": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Affichage des films et de leur catégories",
+                "description": "Renvoie les films et leur catégories",
+                "operationId": "9373b3b84469c5a97696b40063788235",
+                "responses": {
+                    "201": {
+                        "description": "Affiche les films et leur catégories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Movie and categories": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/MovieCategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/movies": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Affichage des films",
+                "description": "Renvoie les films",
+                "operationId": "a7859dc5cd106bbeae5492e22df893ec",
+                "responses": {
+                    "201": {
+                        "description": "Affiche les films",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Movie": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Movie"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Modification d'un film",
+                "description": "Renvoie un film",
+                "operationId": "cb7850b94a42b497e938d19c0cfc6c1e",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "name": "UpdateMovieRequest",
+                        "in": "query",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateMovieRequest"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Film modifié avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Création d'un film",
+                "description": "Renvoie un film",
+                "operationId": "a303e8fe5382b02a193fa994ebef739f",
+                "parameters": [
+                    {
+                        "name": "CreateMovieRequest",
+                        "in": "query",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StoreMovieRequest"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Film crée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Suppression d'un film",
+                "description": "Ne renvoie rien",
+                "operationId": "ae629d07b8324397c80287ba10dcb27a",
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Film supprimé avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/movies/{movie}": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Affichage d'un film",
+                "description": "Renvoie un film",
+                "operationId": "36a46ca60c0936c9a2e4abd20099c5e5",
+                "responses": {
+                    "201": {
+                        "description": "Affiche un film",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreCategoryRequest": {
+                "title": "StoreCategoryRequest",
+                "description": "Store category model request",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Category name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreMovieRequest": {
+                "title": "StoreMovieRequest",
+                "description": "Store movie model request",
+                "required": [
+                    "name",
+                    "description",
+                    "released_at"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Movie name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Movie description",
+                        "type": "string"
+                    },
+                    "released_at": {
+                        "description": "Movie release date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "rate": {
+                        "description": "Movie rate",
+                        "type": "number",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "duration": {
+                        "description": "Movie duration",
+                        "type": "number",
+                        "maximum": 239,
+                        "minimum": 1
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCategoryRequest": {
+                "title": "UpdateCategoryRequest",
+                "description": "Update category model request",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Category name",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateMovieRequest": {
+                "title": "UpdateMovieRequest",
+                "description": "Update movie model request",
+                "properties": {
+                    "name": {
+                        "description": "Movie name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Movie description",
+                        "type": "string"
+                    },
+                    "rate": {
+                        "description": "Movie rate",
+                        "type": "number",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "duration": {
+                        "description": "Movie duration",
+                        "type": "number",
+                        "maximum": 239,
+                        "minimum": 1
+                    }
+                },
+                "type": "object"
+            },
+            "CategoryMovieResource": {
+                "title": "CategoryMovieResource",
+                "description": "Category + movies",
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "description": "Category name",
+                        "type": "string"
+                    },
+                    "movies": {
+                        "description": "Category movies",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Movie"
+                        }
+                    },
+                    "links": {
+                        "description": "Category movies links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "self": {
+                                    "description": "Category self links",
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "href": {
+                                                "description": "Category self link",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "movies": {
+                                    "description": "Category movies links",
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "href": {
+                                                "description": "Category movies link",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    }
+                },
+                "type": "object"
+            },
+            "MovieCategoryResource": {
+                "title": "MovieCategoryResource",
+                "description": "Movie + categories",
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "description": "Movie name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Movie description",
+                        "type": "string"
+                    },
+                    "released_at": {
+                        "description": "Movie release date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "rate": {
+                        "description": "Movie rate",
+                        "type": "number",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "duration": {
+                        "description": "Movie duration",
+                        "type": "number",
+                        "maximum": 239,
+                        "minimum": 1
+                    },
+                    "categories": {
+                        "description": "Movie categories",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Category"
+                        }
+                    },
+                    "links": {
+                        "description": "Movie links and movie categories links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "self": {
+                                    "description": "Movie self links",
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "href": {
+                                                "description": "Movie self link",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "categories": {
+                                    "description": "Movie categories links",
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "href": {
+                                                "description": "Movie categories link",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Category": {
+                "title": "Category",
+                "description": "Category model",
+                "required": [
+                    "id",
+                    "name",
+                    "created_at",
+                    "updated_at"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "description": "Category name",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Movie": {
+                "title": "Movie",
+                "description": "Movie model",
+                "required": [
+                    "id",
+                    "name",
+                    "created_at",
+                    "updated_at"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "description": "Movie name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Movie description",
+                        "type": "string"
+                    },
+                    "released_at": {
+                        "description": "Movie release date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "rate": {
+                        "description": "Movie rate",
+                        "type": "number",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "duration": {
+                        "description": "Movie duration",
+                        "type": "number",
+                        "maximum": 239,
+                        "minimum": 1
+                    },
+                    "created_at": {
+                        "description": "Creation timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-05T12:34:56.789Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
